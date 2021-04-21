@@ -7,9 +7,9 @@ exports.login = (req, res, next) => {
             return next(err)
         }
         if (!user) {
-            return res.json({})
+            return res.json({ success: false })
         }
-        return res.json({ userID: user._id, username: user.username })
+        return res.json({ success: true, userID: user._id, username: user.username })
     })(req, res, next)
 }
 
