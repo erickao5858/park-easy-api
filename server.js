@@ -9,7 +9,7 @@ const express = require('express')
 const app = express()
 
 app.use(cors())
-app.use(express.static(__dirname))
+app.use(express.static(__dirname + '/public'))
 
 const bodyParser = require('body-parser')
 const expressSession = require('express-session')({
@@ -22,7 +22,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(expressSession)
 
-const port = process.env.PORT || 3001
+// Change the port to 3001 if running locally
+const port = process.env.PORT || 3000
 app.listen(port, () => console.log(strings.SERVER_STARTED, port))
 
 /** Passport Setup */
@@ -37,3 +38,6 @@ const mongoConnect = require('./mongo-connect')
 /** Routes */
 const userRoute = require('./routes/userRoute')
 app.use('/', userRoute)
+
+const htmlRoute = require('./routes/htmlRoute')
+app.use('/', htmlRoute)
