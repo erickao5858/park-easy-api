@@ -5,6 +5,7 @@ const cors = require('cors')
 const express = require('express')
 const app = express()
 
+// Allow cross domain requests
 app.use(cors())
 app.use(express.static(__dirname + '/public'))
 
@@ -35,6 +36,3 @@ const mongoConnect = require('./mongo-connect')
 /** Routes */
 const userRoute = require('./routes/userRoute')
 app.use('/', userRoute)
-
-const htmlRoute = require('./routes/htmlRoute')
-app.use('/', htmlRoute)

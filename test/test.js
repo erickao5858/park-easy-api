@@ -1,8 +1,10 @@
 const expect = require('chai').expect
 const request = require('request')
 
+// Declare test category
 describe('User Login', () => {
     const url = 'http://localhost:3000/login'
+    // Declare test case
     it('returns success equal to true if login api works', (done) => {
         request.post(url, { form: { username: 'test', password: 'test' } }, (err, res, body) => {
             body = JSON.parse(body)
