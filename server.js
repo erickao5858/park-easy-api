@@ -1,6 +1,3 @@
-/** Read Strings */
-const strings = require('./strings.json')
-
 /** Enalbe CORS */
 const cors = require('cors')
 
@@ -24,7 +21,7 @@ app.use(expressSession)
 
 // Change the port to 3001 if running locally
 const port = process.env.PORT || 3000
-app.listen(port, () => console.log(strings.SERVER_STARTED, port))
+app.listen(port, () => console.log('Server started, listening on', port))
 
 /** Passport Setup */
 const passport = require('passport')
