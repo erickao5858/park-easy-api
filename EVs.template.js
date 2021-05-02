@@ -1,0 +1,1 @@
+exports.DB_CONNECTION_STRING = '<connection-string>'
