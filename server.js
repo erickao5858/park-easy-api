@@ -36,3 +36,6 @@ const mongoConnect = require('./mongo-connect')
 /** Routes */
 const userRoute = require('./routes/userRoute')
 app.use('/', userRoute)
+
+const settingItemRoute = require('./routes/settingItemRoute')
+app.use('/', settingItemRoute)

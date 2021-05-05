@@ -8,7 +8,7 @@ if (!process.env.DB_CONNECTION_STRING) {
     // If db connection string not found in process.env
     try {
         // Read db connection string from configuration file
-        const { DB_CONNECTION_STRING } = require('./EV')
+        const { DB_CONNECTION_STRING } = require('./EVs')
         db_url = DB_CONNECTION_STRING
     } catch (e) { 
         console.log('Error: enviornment variable "DB_CONNECTION_STRING" not found.')
