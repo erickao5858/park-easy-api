@@ -9,7 +9,6 @@ const settingItemSchema = new Schema({
     collection: 'setting_Item'
 })
 
-// Declare setting model which allows direct data manipulate
 const SettingItem = mongoose.model('setting_Item', settingItemSchema)
 
 module.exports = SettingItem
