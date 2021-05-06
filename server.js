@@ -36,3 +36,17 @@ const mongoConnect = require('./mongo-connect')
 /** Routes */
 const userRoute = require('./routes/userRoute')
 app.use('/', userRoute)
+
+const settingItemRoute = require('./routes/settingItemRoute')
+app.use('/', settingItemRoute)
+
+const userSettingRoute = require('./routes/userSettingRoute')
+app.use('/', userSettingRoute)
+
+app.use((err, req, res, next) => {
+    // Invalid json string
+    if (err instanceof SyntaxError) {
+        return res.status(400).json({ err: { message: "Invalid data" } });
+    }
+    next()
+})

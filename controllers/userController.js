@@ -25,3 +25,10 @@ exports.register = (req, res) => {
         return res.json({ success: true })
     })
 }
+
+exports.isUserExists = (userID, callback) => {
+    User.findOne({ _id: userID }, (err, record) => {
+        let result = !record ? false : true
+        callback(result)
+    })
+}
