@@ -3,7 +3,7 @@ const request = require('request')
 
 // Declare test category
 describe('User Login', () => {
-    const url = 'http://localhost:3000/login'
+    const url = 'http://localhost:3001/login'
     // Declare test case
     it('returns success equal to true if login api works', (done) => {
         request.post(url, { form: { username: 'test', password: 'test' } }, (err, res, body) => {
@@ -22,7 +22,7 @@ describe('User Login', () => {
 })
 
 describe('User Register', () => {
-    const url = 'http://localhost:3000/register'
+    const url = 'http://localhost:3001/register'
     it('returns success equal to false if register api works with duplicate user detection', (done) => {
         request.post(url, { form: { username: 'test', password: 'test' } }, (err, res, body) => {
             body = JSON.parse(body)

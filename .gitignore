@@ -105,3 +105,6 @@ dist
 
 # Environment variables
 EVs.js
+
+# Package-lock.json
+package-lock.json
