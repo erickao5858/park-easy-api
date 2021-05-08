@@ -5,15 +5,22 @@ const request = require('request')
 describe('User Login', () => {
     const url = 'http://localhost:3001/login'
     // Declare test case
-    it('returns success equal to true if login api works', (done) => {
+    it('returns success equal to true if correct credentials are provided', (done) => {
         request.post(url, { form: { username: 'test', password: 'test' } }, (err, res, body) => {
             body = JSON.parse(body)
             expect(body.success).to.equal(true)
             done()
         })
     })
-    it('returns success equal to false if login api works with incorrect credentials', (done) => {
+    it('returns success equal to false if incorrect credentials are provided', (done) => {
         request.post(url, { form: { username: 'test', password: 'test1' } }, (err, res, body) => {
+            body = JSON.parse(body)
+            expect(body.success).to.equal(false)
+            done()
+        })
+    })
+    it('returns success equal to false if credentials not provided', (done) => {
+        request.post(url, {}, (err, res, body) => {
             body = JSON.parse(body)
             expect(body.success).to.equal(false)
             done()
@@ -23,8 +30,22 @@ describe('User Login', () => {
 
 describe('User Register', () => {
     const url = 'http://localhost:3001/register'
-    it('returns success equal to false if register api works with duplicate user detection', (done) => {
+    it('returns success equal to false if duplicate username provided', (done) => {
         request.post(url, { form: { username: 'test', password: 'test' } }, (err, res, body) => {
+            body = JSON.parse(body)
+            expect(body.success).to.equal(false)
+            done()
+        })
+    })
+    it('returns success equal to false if username not provided', (done) => {
+        request.post(url, {}, (err, res, body) => {
+            body = JSON.parse(body)
+            expect(body.success).to.equal(false)
+            done()
+        })
+    })
+    it('returns success equal to false if password not provided', (done) => {
+        request.post(url, { form: { username: 'test' } }, (err, res, body) => {
             body = JSON.parse(body)
             expect(body.success).to.equal(false)
             done()
@@ -32,10 +53,10 @@ describe('User Register', () => {
     })
 })
 
-describe('Location Service', () => {
-    const url = 'https://1b662c15.us-south.apigw.appdomain.cloud/park-easy-data/location'
-    it('returns success equal to true if location service works', (done) => {
-        request(url,(err, res, body) => {
+describe('Setting items', () => {
+    const url = 'http://localhost:3001/settingItem'
+    it('returns success equal to true if returns setting items', (done) => {
+        request.get(url, (err, res, body) => {
             body = JSON.parse(body)
             expect(body.success).to.equal(true)
             done()

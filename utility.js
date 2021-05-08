@@ -1,16 +1,31 @@
-const mongoose = require('mongoose')
+// JSON web key
+const jwksClient = require('jwks-rsa')
+const client = jwksClient({
+    jwksUri: 'https://us-south.appid.cloud.ibm.com/oauth/v4/aeb1b95f-8570-4c15-bf59-276923ac254c/publickeys'
+})
 
-exports.OK = 0
-exports.ERROR_STRING_IS_EMPTY = 1
-exports.ERROR_STRING_INVALID = 2
-exports.ERROR_RECORD_NOT_FOUND = 3
+getPublicKey = (header, callback) => {
+    client.getSigningKey(header.kid, (err, key) => {
+        const signingKey = key.publicKey || key.rsaPublicKey
+        return callback(null, signingKey)
+    })
+}
 
-exports.isValidObjectID = (string) => {
-    if (!string) {
-        return this.ERROR_STRING_IS_EMPTY
+const jwt = require('jsonwebtoken')
+
+exports.verifyToken = (token, callback) => {
+    if (!token) {
+        return callback({ message: 'Token not provided!' })
     }
-    if (!mongoose.isValidObjectId(string)) {
-        return this.ERROR_STRING_INVALID
-    }
-    return this.OK
+    jwt.verify(token, getPublicKey, (err, decoded) => {
+        return callback(err, decoded)
+    })
+}
+
+const log4js = require('log4js')
+
+exports.getLogger = (category) => {
+    const logger = log4js.getLogger(category)
+    logger.level = 'debug'
+    return logger
 }

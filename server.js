@@ -20,9 +20,13 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(expressSession)
 
+//  Logger
+const Utility = require('./utility')
+const logger = Utility.getLogger('Server')
+
 // Change the port to 3001 if running locally
 const port = process.env.PORT || 3001
-app.listen(port, () => console.log('Server started, listening on', port))
+app.listen(port, () => logger.info('Server started, listening on', port))
 
 /** Passport Setup */
 const passport = require('passport')
@@ -31,7 +35,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 /** Mongoose Setup */
-const mongoConnect = require('./mongo-connect')
+require('./mongo-connect')
 
 /** Routes */
 const userRoute = require('./routes/userRoute')
@@ -44,9 +48,10 @@ const userSettingRoute = require('./routes/userSettingRoute')
 app.use('/', userSettingRoute)
 
 app.use((err, req, res, next) => {
+    Utility.getLogger('Route').error('Invalid data received')
     // Invalid json string
     if (err instanceof SyntaxError) {
-        return res.status(400).json({ err: { message: "Invalid data" } });
+        return res.status(400).json({ err: { message: "Invalid data", details: err } });
     }
     next()
 })

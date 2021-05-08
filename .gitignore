@@ -108,3 +108,7 @@ EVs.js
 
 # Package-lock.json
 package-lock.json
+
+# Keys
+private_key.pem
+public_key.pem
