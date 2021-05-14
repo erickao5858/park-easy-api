@@ -4,7 +4,10 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema({
     username: String,
-    password: String
+    password: String,
+    displayName: String,
+    provider: { type: String, default: 'local' },
+    providerID: String
 })
 
 // Add passport local mongoose plugin to user schema

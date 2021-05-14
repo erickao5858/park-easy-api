@@ -33,6 +33,7 @@
     "mocha": "^8.3.2",
     "mongoose": "^5.12.3",
     "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
     "passport-local-mongoose": "^6.1.0",
     "request": "^2.88.2"
   }

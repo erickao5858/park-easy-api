@@ -34,6 +34,9 @@ const passport = require('passport')
 app.use(passport.initialize())
 app.use(passport.session())
 
+/** Passport with Google Strategy */
+require('./auth/google')
+
 /** Mongoose Setup */
 require('./mongo-connect')
 
@@ -55,3 +58,6 @@ app.use((err, req, res, next) => {
     }
     next()
 })
+
+const authRoute = require('./routes/authRoute')
+app.use('/', authRoute)
