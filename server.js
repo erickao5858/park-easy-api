@@ -1,26 +1,29 @@
-/** Enalbe CORS */
-const cors = require('cors')
+/** Read Environment variables */
+require('./environment')
 
 /** Express Setup */
 const express = require('express')
 const app = express()
-
-// Allow cross domain requests
-app.use(cors())
 app.use(express.static(__dirname + '/public'))
 
+/** CORS Setup */
+const cors = require('cors')
+app.use(cors())
+
+/** JSON Helper */
 const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+/** Express Session */
 const expressSession = require('express-session')({
     secret: 'parkeasy',
     resave: false,
     saveUninitialized: false
 })
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
 app.use(expressSession)
 
-//  Logger
+/** Logger Setup */
 const Utility = require('./utility')
 const logger = Utility.getLogger('Server')
 
@@ -34,11 +37,11 @@ const passport = require('passport')
 app.use(passport.initialize())
 app.use(passport.session())
 
-/** Passport with Google Strategy */
-require('./auth/google')
+/** Passport Strategy */
+require('./auth/auth')
 
 /** Mongoose Setup */
-require('./mongo-connect')
+require('./mongo')
 
 /** Routes */
 const userRoute = require('./routes/userRoute')
@@ -50,6 +53,9 @@ app.use('/', settingItemRoute)
 const userSettingRoute = require('./routes/userSettingRoute')
 app.use('/', userSettingRoute)
 
+const authRoute = require('./routes/authRoute')
+app.use('/', authRoute)
+
 app.use((err, req, res, next) => {
     Utility.getLogger('Route').error('Invalid data received')
     // Invalid json string
@@ -58,6 +64,3 @@ app.use((err, req, res, next) => {
     }
     next()
 })
-
-const authRoute = require('./routes/authRoute')
-app.use('/', authRoute)

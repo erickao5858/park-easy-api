@@ -103,9 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-# Environment variables
-EVs.js
-
 # Package-lock.json
 package-lock.json
 
