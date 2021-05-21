@@ -15,6 +15,7 @@ mongoose.connect(process.env.DB_CONNECTION_STRING, {
     // Error occurs
     if (err) {
         logger.fatal('Cannot establish a connection with database')
+        logger.fatal(err)
         process.exit(0)
     }
 })
