@@ -1,32 +1,28 @@
-# ParkEasy API
+# Park Easy API
 ## Description
-ParkEasy API is a service that provides database access to ParkEasy Web application.
+Park Easy API is a service that provides database services and auth services to Park Easy Web application.
 ## How to start the server
 Local machine:
-DB_CONNECTION_STRING=|db-connection-string| npm start
+1. Clone the repo
+2. Duplicate file .env.template and rename it to .env
+3. Assign value for all keys specified in file .env
+4. Use command npm start to start the server
 
 IBM Cloud Foundry:
-Setup DB_CONNECTION_STRING here:
-Runtime->Environment Variables->User defined variables
+1. Clone the repo
+2. User defined variables configuration page, assign environment variables as specified in file .env.template
 
 Docker:
-sudo docker run -p 80:3000 --env DB_CONNECTION_STRING=|db-connection-string| erickao5858/park-easy-web
+1. Download file .env.template and rename it to .env
+2. Assign value for all keys specified in file .env
+3. Use command sudo docker run -p 80:3000 erickao5858/park-easy-web --env-file &lt;path-to-file&gt;
+
 ## Updates
+
+#### 1.1.0
+- Setting items
+- Sync settings
+- Login with google/facebook account
+
 #### 1.0.0
-- Implemented user login and register functions
-- Extracted db connection string as an environment variable
-
-#### 0.3.0
-- Implemented support to IBM Cloud Foundry continuous delivery
-
-#### 0.2.2
-- Updated github actions
-
-#### 0.2.1
-- Updated README.md 
-
-#### 0.2.0
-- Implemented continuous delivery with github actions
-
-#### 0.1.0
-- Created files from template
+- Basic user login and register function
