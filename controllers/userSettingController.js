@@ -1,7 +1,6 @@
 const Utility = require('../utility')
 const UserSetting = require('../models/userSetting')
 const { isUserExists } = require('./userController')
-const logger = Utility.getLogger('User-setting')
 
 exports.getSettings = (req, res) => {
     const token = req.query.token
@@ -17,7 +16,6 @@ exports.getSettings = (req, res) => {
         const userID = decoded.identities[0].id
         isUserExists(userID, (err, record) => {
             if (err) {
-                logger.error('Request failed at function isUserExists')
                 return res.json({ success: false, err: { message: 'Service unavailable!', details: err } })
             }
             if (!record) {
@@ -25,10 +23,9 @@ exports.getSettings = (req, res) => {
             }
             UserSetting.findOne({ userID: userID }, (err, record) => {
                 if (err) {
-                    logger.error('Request failed at function UserSetting.findOne')
                     return res.json({ success: false, err: { message: 'Service unavailable!', details: err } })
                 }
-                if(!record){
+                if (!record) {
                     return res.json({ success: false, err: { message: 'Record not found!' } })
                 }
                 return res.json({ success: true, userSettings: record })
@@ -56,7 +53,6 @@ exports.updateSettings = (req, res) => {
         const userID = decoded.identities[0].id
         isUserExists(userID, (err, record) => {
             if (err) {
-                logger.error('Request failed at function isUserExists')
                 return res.json({ success: false, err: { message: 'Service unavailable!', details: err } })
             }
             if (!record) {
@@ -64,7 +60,6 @@ exports.updateSettings = (req, res) => {
             }
             UserSetting.findOneAndUpdate({ userID: userID }, { settings: userSettings }, { upsert: true, new: true, setDefaultsOnInsert: true }, (err, record) => {
                 if (err) {
-                    logger.error('Request failed at function UserSetting.findOneAndUpdate')
                     return res.json({ success: false, err: { message: 'Service unavailable!', details: err } })
                 } else {
                     return res.json({ success: true, userSettings: record })
