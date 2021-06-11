@@ -17,7 +17,7 @@ IBM Cloud Foundry:
 Docker:
 1. Download file .env.template and rename it to .env
 2. Assign value for all keys specified in file .env
-3. Use command sudo docker run -p 80:3000 --env DB_CONNECTION_STRING=&lt;database-connection-string&gt; --env-file &lt;path-to-file&gt; erickao5858/park-easy-api
+3. Use command sudo docker run --network host --env-file &lt;path-to-file&gt; erickao5858/park-easy-api
 
 ## Updates
 #### 1.1.0

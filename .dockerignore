@@ -110,3 +110,6 @@ package-lock.json
 # Keys
 private_key.pem
 public_key.pem
+
+# Manifests
+manifest.yml
