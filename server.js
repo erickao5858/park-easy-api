@@ -71,7 +71,3 @@ app.use((err, req, res, next) => {
     }
     next()
 })
-
-app.get('/', (req, res) => {
-    res.send('Hello')
-})
