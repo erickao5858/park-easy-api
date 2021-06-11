@@ -20,6 +20,11 @@ Docker:
 3. Use command sudo docker run --network host --env-file &lt;path-to-file&gt; erickao5858/park-easy-api
 
 ## Updates
+
+#### 1.2.0
+- Feedback api
+- Unit test for docker
+
 #### 1.1.0
 - Setting items
 - Sync settings
