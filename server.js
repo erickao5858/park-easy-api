@@ -1,3 +1,4 @@
+
 /** Read Environment variables */
 require('./environment')
 
@@ -29,7 +30,10 @@ const logger = Utility.getLogger('Server')
 
 // Change the port to 3001 if running locally
 const port = process.env.PORT || 3001
-app.listen(port, () => logger.info('Server started, listening on', port))
+// Wait for database
+setTimeout(() => {
+    app.listen(port, () => logger.info('Server started, listening on', port))
+}, 2000)
 
 /** Passport Setup */
 const passport = require('passport')
@@ -66,4 +70,8 @@ app.use((err, req, res, next) => {
         return res.status(400).json({ err: { message: "Invalid data", details: err } });
     }
     next()
+})
+
+app.get('/', (req, res) => {
+    res.send('Hello')
 })
