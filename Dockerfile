@@ -8,4 +8,4 @@ EXPOSE 3001
 
 RUN npm install
 
-CMD ["node","dockerTest.js"]
+CMD ["node","entry.js"]
